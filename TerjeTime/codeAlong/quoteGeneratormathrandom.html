@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+
+        <style>
+            button{
+                height: 100px;
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="randomQuote()"></button>
+        <!-- <button onclick="getQuote()"></button> -->
+        <div id="app"></div>
+
+        <script>
+
+            const appDiv = document.getElementById('app');
+            let quote = "";
+            let randomIndex;
+            // Model
+
+            let arrayOfQuotes = [
+            {author: 'Jim Rohn',
+            quote: 'Beware of what you become in pursuit of what you want.'
+            },
+            {author: 'Epictetus',
+            quote: 'It\'s not what happens to you, but how you react to it that matters.'
+            },
+            {author: 'Frank Sinatra',
+            quote: 'The best revenge is massive success.'
+            },
+            {author: 'John Lennon',
+            quote: 'Life is what happens to you while you\'re busy making other plans.'
+            },
+            {author: 'Nelson Mandela',
+            quote: 'Resentment is like drinking poison and waiting for your enemies to die.'
+            },
+            {author: 'Elbert Hubbard',
+            quote: 'Do not take life too seriously. You will not get out alive.'
+            },
+
+
+        ];
+
+        // View
+        updateView();
+        function updateView() {
+            let html = "";
+            html = `Author: ${quote.author || ""}
+            </br>
+            Quote: ${quote.quote || ""}`;
+
+            appDiv.innerHTML = html;
+        }
+
+        // Controller
+        function randomQuote() {
+            randomIndex = Math.floor(Math.random() * arrayOfQuotes.length);
+
+            quote = arrayOfQuotes[randomIndex];
+            updateView();
+
+        }
+
+        function getQuote() {
+            // quote += arrayOfQuotes[0].author;
+            // quote += arrayOfQuotes[0].quote;
+            quote = arrayOfQuotes[0].quote;
+            updateView();
+        }
+
+        </script>
+
+        <script src="" async defer></script>
+    </body>
+</html>

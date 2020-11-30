@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Test Suite</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.12.0.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="common.js"></script>
+    <script src="controller.js"></script>
+    <script src="https://code.jquery.com/qunit/qunit-2.12.0.js"></script>
+
+    <script>
+        // model
+        let numbers;
+
+        function initModel() {
+            numbers = [];
+        }
+
+        QUnit.test('test sum 1', function (assert) {
+            initModel();
+            addNumber(1);
+            addNumber(2);
+            addNumber(3);
+            const actualSum = getSum();
+            const expectedSum = 6;
+            assert.equal(actualSum, expectedSum);
+        });
+
+        QUnit.test('test sum after remove', function (assert) {
+            initModel();
+            addNumber(1);
+            addNumber(2);
+            addNumber(3);
+            removeNumberByIndex(1);
+            const actualSum = getSum();
+            const expectedSum = 4;
+            assert.equal(actualSum, expectedSum);
+        });
+
+        QUnit.test('test reverse', function (assert) {
+            initModel();
+            addNumber(1);
+            addNumber(2);
+            addNumber(3);
+            reverseNumbers();
+            const actual = numbers;
+            const expected = [3, 2, 1];
+            assert.deepEqual(actual, expected);
+        });
+
+        /*
+            3 3 4 5 5
+
+            0 - 0
+            1 - 0
+            2 - 0
+            3 - 2
+            4 - 1
+            5 - 2
+            6 - 0
+
+            [0,0,0,2,1,2,0]
+
+         */
+        QUnit.test('test freq table', function (assert) {
+            initModel();
+            addNumber(3);
+            addNumber(3);
+            addNumber(4);
+            addNumber(5);
+            addNumber(5);
+            let actual = getFrequencyTable();
+            const expected = [];
+            expected[3] = 2;
+            expected[4] = 1;
+            expected[5] = 2;
+            assert.deepEqual(actual, expected);
+        });
+
+        QUnit.test('test freq table - 2', function (assert) {
+            initModel();
+            addNumber(3);
+            addNumber(3);
+            addNumber(4);
+            addNumber(5);
+            addNumber(5);
+            addNumber(12);
+            let actual = getFrequencyTable();
+            const expected = [];
+            expected[3] = 2;
+            expected[4] = 1;
+            expected[5] = 2;
+            expected[12] = 1;
+            assert.deepEqual(actual, expected);
+        });
+    </script>
+</body>
+
+</html>
